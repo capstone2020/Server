@@ -14,4 +14,14 @@ def post_list(request):
 			os.system('echo "1" > /dev/ttyACM0')
 		elif request.POST['action_code'] == '2':
 			os.system('echo "2" > /dev/ttyACM0')
+	else:
+		print("Recieved GET")
+		print(request.GET['action_code'])
+		os.system('stty -F /dev/ttyACM0 -hupcl')
+		if request.GET['action_code'] == '0':
+			os.system('echo "0" > /dev/ttyACM0')
+		elif request.GET['action_code'] == '1':
+			os.system('echo "1" > /dev/ttyACM0')
+		elif request.GET['action_code'] == '2':
+			os.system('echo "2" > /dev/ttyACM0')
 	return render(request, 'arduino_controller/index.html', {})
